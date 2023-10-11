@@ -7,24 +7,20 @@ function useFetch(url) {
 
   // Make API call
   useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
-
     (async () => {
       try {
-        const response = await fetch(url, { signal: signal });
+        const response = await fetch(url);
         if (response.status >= 400) {
           throw new Error("server error");
         }
         const result = await response.json();
         setData(result);
       } catch (error) {
-        if (error.message !== "The operation was aborted. ") setError(error);
+        setError(error);
       } finally {
         setLoading(false);
       }
     })();
-    return () => controller.abort();
   }, []);
 
   return [data, error, loading];
