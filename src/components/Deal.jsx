@@ -7,7 +7,7 @@ function Deal({ id }) {
   );
 
   if (loading) return <div>loading...</div>;
-  if (error !== null) return <div>error</div>;
+  if (error) return <div>error</div>;
   return <div>{data.gameInfo.name}</div>;
 }
 
