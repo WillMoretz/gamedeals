@@ -8,7 +8,7 @@ function StoreCard({ id }) {
   );
 
   if (loading) return <div>loading...</div>;
-  console.log(data);
+  if (error) return <div>{error.message || "Load Failed"}</div>;
   return <Store data={data} />;
 }
 
