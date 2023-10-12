@@ -1,20 +1,14 @@
-import { useEffect, useState } from "react";
+import useFetch from "../useFetch";
 import Store from "./Store";
 
 // Displays a game store and some of its top rated deals
 function StoreCard({ id }) {
-  const [data, setData] = useState(null);
+  const [data, error, loading] = useFetch(
+    `https://www.cheapshark.com/api/1.0/deals?storeID=${id}`
+  );
 
-  useEffect(() => {
-    (async () => {
-      const response = await fetch(
-        `https://www.cheapshark.com/api/1.0/deals?storeID=${id}`
-      );
-      const result = await response.json();
-      setData(result);
-    })();
-  }, [id]);
-
+  if (loading) return <div>loading...</div>;
+  console.log(data);
   return <Store data={data} />;
 }
 
