@@ -1,15 +1,17 @@
 import { useEffect, useReducer } from "react";
 
 function useFetch(url) {
+  // State values that are returned from the hook
   const initialState = {
     data: null,
     error: null,
     loading: true,
   };
 
+  // Update the state
   const [state, dispatch] = useReducer((state, action) => {
     switch (action.type) {
-      case "LOADED":
+      case "SUCCESS":
         return { ...initialState, loading: false, data: action.payload };
       case "ERROR":
         return { ...initialState, loading: false, error: action.payload };
@@ -20,22 +22,24 @@ function useFetch(url) {
 
   useEffect(() => {
     if (!url) return;
+    let shouldCancelRequest = false;
 
-    let cancelRequest = false;
+    // Perform the fetch
     (async () => {
       try {
         const response = await fetch(url);
         const result = await response.json();
-        if (cancelRequest) return;
-        dispatch({ type: "LOADED", payload: result });
+        if (shouldCancelRequest) return;
+        dispatch({ type: "SUCCESS", payload: result });
       } catch (error) {
-        if (cancelRequest) return;
+        if (shouldCancelRequest) return;
         dispatch({ type: "ERROR", payload: error });
       }
     })();
 
+    // Will prevent new actions from being dispatched if the the component using this hook unmounts during the fetch
     return function cleanup() {
-      cancelRequest = true;
+      shouldCancelRequest = true;
     };
   }, [url]);
 
