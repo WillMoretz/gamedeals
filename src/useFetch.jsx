@@ -1,9 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer } from "react";
 
 function useFetch(url) {
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const initialState = {
+    data: null,
+    error: null,
+    loading: true,
+  };
+
+  const [state, dispatch] = useReducer((state, action) => {
+    switch (action.type) {
+      case "LOADED":
+        return { ...initialState, loading: false, data: action.payload };
+      case "ERROR":
+        return { ...initialState, loading: false, error: action.payload };
+      default:
+        return state;
+    }
+  }, initialState);
 
   useEffect(() => {
     if (!url) return;
@@ -14,13 +27,10 @@ function useFetch(url) {
         const response = await fetch(url);
         const result = await response.json();
         if (cancelRequest) return;
-        setData(result);
+        dispatch({ type: "LOADED", payload: result });
       } catch (error) {
         if (cancelRequest) return;
-        setError(error);
-      } finally {
-        if (cancelRequest) return;
-        setLoading(false);
+        dispatch({ type: "ERROR", payload: error });
       }
     })();
 
@@ -29,7 +39,7 @@ function useFetch(url) {
     };
   }, [url]);
 
-  return [data, error, loading];
+  return [state.data, state.error, state.loading];
 }
 
 export default useFetch;
