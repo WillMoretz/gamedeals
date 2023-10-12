@@ -1,6 +1,6 @@
 // Displays a game store
-function Store() {
-  return <div>NOT IMPLEMENTED: STORE</div>;
+function Store({ data }) {
+  return <div>{data[0].title}</div>;
 }
 
 export default Store;
