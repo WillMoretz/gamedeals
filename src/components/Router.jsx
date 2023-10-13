@@ -20,6 +20,10 @@ function Router() {
       path: "/about",
       element: <AboutPage />,
     },
+    {
+      path: "/deal/:id",
+      element: <ErrorPage />,
+    },
   ]);
 
   return <RouterProvider router={router} />;
