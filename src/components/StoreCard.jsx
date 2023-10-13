@@ -9,7 +9,16 @@ function StoreCard({ id }) {
 
   if (loading) return <div>loading...</div>;
   if (error) return <div>{error.message || "Load Failed"}</div>;
-  return <Store data={data} />;
+
+  const trimmedData = data.slice(0, 5);
+
+  return (
+    <>
+      {trimmedData.map((game) => (
+        <Store data={game} key={game.dealID} />
+      ))}
+    </>
+  );
 }
 
 export default StoreCard;
