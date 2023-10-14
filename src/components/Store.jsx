@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Store({ data }) {
   return (
     <div>
-      <img src={data.thumb} />
+      <img src={data.thumb} alt={`${data.title} thumbnail`} />
       <span>{data.title} </span>
       <span>${data.salePrice} </span>
       <span>{Math.round(data.savings)}%</span>
