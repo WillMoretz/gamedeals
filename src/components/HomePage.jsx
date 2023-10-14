@@ -1,10 +1,19 @@
 import StoreCard from "./StoreCard";
 
-const STORE_IDS = [1, 4, 25, 7, 11, 3, 5, 15];
+const STORES = [
+  { id: 1, name: "Steam" },
+  { id: 4, name: "Amazon" },
+  { id: 25, name: "Epic Games Store" },
+  { id: 7, name: "GOG" },
+  { id: 11, name: "Humble Store" },
+  { id: 3, name: "GreenManGaming" },
+  { id: 5, name: "Gamestop" },
+  { id: 15, name: "Fanatical" },
+];
 
 // Displays the home page, the landing page
 function HomePage() {
-  return <StoreCard id={STORE_IDS[0]} />;
+  return <StoreCard id={STORES[0].id} name={STORES[0].name} />;
 }
 
 export default HomePage;
