@@ -1,5 +1,5 @@
+import { Link } from "react-router-dom";
 import useFetch from "../useFetch";
-import Store from "./Store";
 
 // Displays a game store and some of its top rated deals
 function StoreCard({ id, name }) {
@@ -20,7 +20,13 @@ function StoreCard({ id, name }) {
       />
       <h3>{name}</h3>
       {trimmedData.map((game) => (
-        <Store data={game} key={game.dealID} />
+        <div key={game.dealID}>
+          <img src={game.thumb} alt={`${game.title} thumbnail`} />
+          <span>{game.title} </span>
+          <span>${game.salePrice} </span>
+          <span>{Math.round(game.savings)}%</span>
+          <Link to={`deal/${game.dealID}`}>link</Link>
+        </div>
       ))}
     </>
   );
