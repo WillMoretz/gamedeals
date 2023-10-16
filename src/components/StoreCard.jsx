@@ -25,7 +25,7 @@ function StoreCard({ id, name }) {
           <span>{game.title} </span>
           <span>${game.salePrice} </span>
           <span>{Math.round(game.savings)}%</span>
-          <Link to={`deal/${game.dealID}`}>link</Link>
+          <Link to={`/deal/${game.dealID}`}>link</Link>
         </div>
       ))}
     </>
