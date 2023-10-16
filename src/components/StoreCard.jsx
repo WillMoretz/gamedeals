@@ -14,11 +14,13 @@ function StoreCard({ id, name }) {
 
   return (
     <>
-      <img
-        src={`https://www.cheapshark.com/img/stores/icons/${id - 1}.png`}
-        alt={`Logo of ${name}`}
-      />
-      <h3>{name}</h3>
+      <Link to={`/stores/${id}`}>
+        <img
+          src={`https://www.cheapshark.com/img/stores/icons/${id - 1}.png`}
+          alt={`Logo of ${name}`}
+        />
+        <h3>{name}</h3>
+      </Link>
       {trimmedData.map((game) => (
         <div key={game.dealID}>
           <img src={game.thumb} alt={`${game.title} thumbnail`} />
