@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import useFetch from "../useFetch";
+import StoreItem from "./StoreItem";
 
 function StorePage() {
   const params = useParams();
@@ -13,13 +14,7 @@ function StorePage() {
   return (
     <>
       {data.map((game) => (
-        <div key={game.dealID}>
-          <img src={game.thumb} alt={`${game.title} thumbnail`} />
-          <span>{game.title} </span>
-          <span>${game.salePrice} </span>
-          <span>{Math.round(game.savings)}%</span>
-          <Link to={`/deal/${game.dealID}`}>link</Link>
-        </div>
+        <StoreItem game={game} key={game.dealID} />
       ))}
     </>
   );
