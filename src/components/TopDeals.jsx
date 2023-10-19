@@ -1,5 +1,6 @@
 import useFetch from "../useFetch";
 import StoreItem from "./StoreItem";
+import filterRepeatDeals from "../filterRepeatDeals";
 
 function TopDeals() {
   const [data, error, loading] = useFetch(
@@ -9,13 +10,12 @@ function TopDeals() {
   if (loading) return <div>loading...</div>;
   if (error) return <div>{error.message || "Load Failed"}</div>;
 
-  const trimmedData = data.slice(0, 10);
-  console.log(data);
+  const filteredData = filterRepeatDeals(data, 10);
 
   return (
     <>
       <h2>Top Deals</h2>
-      {trimmedData.map((game) => (
+      {filteredData.map((game) => (
         <StoreItem game={game} key={game.dealID} />
       ))}
     </>
