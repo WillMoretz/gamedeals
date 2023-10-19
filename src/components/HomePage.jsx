@@ -1,4 +1,5 @@
 import StoreCard from "./StoreCard";
+import TopDeals from "./TopDeals";
 
 const STORES = [
   { id: 1, name: "Steam" },
@@ -13,7 +14,12 @@ const STORES = [
 
 // Displays the home page, the landing page
 function HomePage() {
-  return <StoreCard id={STORES[0].id} name={STORES[0].name} />;
+  return (
+    <>
+      <TopDeals />
+      <StoreCard id={STORES[0].id} name={STORES[0].name} />;
+    </>
+  );
 }
 
 export default HomePage;
