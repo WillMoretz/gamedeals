@@ -17,7 +17,7 @@ function HomePage() {
   return (
     <>
       <TopDeals />
-      <StoreCard id={STORES[0].id} name={STORES[0].name} />;
+      <StoreCard id={STORES[0].id} name={STORES[0].name} />
     </>
   );
 }

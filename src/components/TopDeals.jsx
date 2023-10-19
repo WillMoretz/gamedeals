@@ -19,7 +19,7 @@ function TopDeals() {
       {filteredData.map((game) => (
         <StoreItem game={game} key={game.dealID} />
       ))}
-      <Link to={"/browse/"}>View More</Link>
+      <Link to="/browse/">View More</Link>
     </>
   );
 }
