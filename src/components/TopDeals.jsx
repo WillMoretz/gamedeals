@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useFetch from "../useFetch";
 import StoreItem from "./StoreItem";
 import filterRepeatDeals from "../filterRepeatDeals";
@@ -18,6 +19,7 @@ function TopDeals() {
       {filteredData.map((game) => (
         <StoreItem game={game} key={game.dealID} />
       ))}
+      <Link to={"/browse/"}>View More</Link>
     </>
   );
 }
