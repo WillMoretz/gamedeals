@@ -16,8 +16,8 @@ function TopDeals() {
   return (
     <>
       <h2>Top Deals</h2>
-      {filteredData.map((game) => (
-        <StoreItem game={game} key={game.dealID} />
+      {filteredData.map((deal) => (
+        <StoreItem deal={deal} key={deal.dealID} />
       ))}
       <Link to="/browse/">View More</Link>
     </>

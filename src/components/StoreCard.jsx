@@ -23,8 +23,8 @@ function StoreCard({ id, name }) {
         />
         <h3>{name}</h3>
       </Link>
-      {trimmedData.map((game) => (
-        <StoreItem game={game} key={game.dealID} />
+      {trimmedData.map((deal) => (
+        <StoreItem deal={deal} key={deal.dealID} />
       ))}
     </>
   );
