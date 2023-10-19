@@ -6,7 +6,7 @@ function addCacheItem(key, value) {
 
 function fetchCacheItem(key) {
   if (key in CACHE) return CACHE[key];
-  else return null;
+  return null;
 }
 
 export { addCacheItem, fetchCacheItem };
