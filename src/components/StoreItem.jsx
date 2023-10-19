@@ -1,13 +1,18 @@
 import { Link } from "react-router-dom";
 
-function StoreItem({ game }) {
+function StoreItem({ deal }) {
   return (
-    <Link to={`/deal/${game.dealID}`}>
-      <img src={game.thumb} alt={`${game.title} thumbnail`} />
-      <span>{game.title} </span>
-      <span>${game.salePrice} </span>
-      <span>{Math.round(game.savings)}%</span>
-    </Link>
+    <>
+      <Link to={`/deal/${deal.dealID}`}>
+        <img src={deal.thumb} alt={`${deal.title} thumbnail`} />
+        <span>{deal.title} </span>
+        <span>${deal.salePrice} </span>
+        <span>{Math.round(deal.savings)}%</span>
+      </Link>
+      <Link to={`https://www.cheapshark.com/redirect?dealID=${deal.dealID}`}>
+        Buy
+      </Link>
+    </>
   );
 }
 
