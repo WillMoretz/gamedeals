@@ -15,7 +15,8 @@ function StoreCard({ id, name }) {
 
   return (
     <>
-      <Link to={`/stores/${id}`}>
+      {/* <Link to={`/stores/${id}`}> */}
+      <Link to="/browse/">
         <img
           src={`https://www.cheapshark.com/img/stores/icons/${id - 1}.png`}
           alt={`Logo of ${name}`}
