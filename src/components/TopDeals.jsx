@@ -3,7 +3,7 @@ import StoreItem from "./StoreItem";
 
 function TopDeals() {
   const [data, error, loading] = useFetch(
-    "https://www.cheapshark.com/api/1.0/deals"
+    "https://www.cheapshark.com/api/1.0/deals?steamRating=75&steamworks=1&lowerPrice=20"
   );
 
   if (loading) return <div>loading...</div>;
