@@ -18,6 +18,7 @@ function HomePage() {
   return (
     <>
       <TopDeals />
+      <h2>Deals by Store</h2>
       <StoreCard id={STORES[0].id} name={STORES[0].name} />
       <Link to="/browse/">View more deals on the browse page!</Link>
     </>
