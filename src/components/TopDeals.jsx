@@ -5,7 +5,7 @@ import filterRepeatDeals from "../filterRepeatDeals";
 
 function TopDeals() {
   const [data, error, loading] = useFetch(
-    "https://www.cheapshark.com/api/1.0/deals?steamRating=75&steamworks=1&lowerPrice=20"
+    "https://www.cheapshark.com/api/1.0/deals?steamRating=75&steamworks=1&AAA=1&upperPrice=30&sortBy=Metacritic&onSale=1"
   );
 
   if (loading) return <div>loading...</div>;
