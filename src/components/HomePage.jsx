@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import StoreCard from "./StoreCard";
 import TopDeals from "./TopDeals";
 
@@ -18,6 +19,7 @@ function HomePage() {
     <>
       <TopDeals />
       <StoreCard id={STORES[0].id} name={STORES[0].name} />
+      <Link to="/browse/">View more deals on the browse page!</Link>
     </>
   );
 }
