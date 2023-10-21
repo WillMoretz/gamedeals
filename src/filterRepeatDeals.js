@@ -1,5 +1,5 @@
 // Filters out game deals from different stores with the same title
-export default function filterRepeatDeals(dealArray, responseNumTarget = 5) {
+export default function filterRepeatDeals(dealArray, responseNumTarget = 60) {
   if (!dealArray || dealArray.length === 0) return [];
 
   const titles = [];
