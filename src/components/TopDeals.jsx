@@ -3,9 +3,12 @@ import useFetch from "../useFetch";
 import StoreItem from "./StoreItem";
 import filterRepeatDeals from "../filterRepeatDeals";
 
+const QUERYPARAMS =
+  "steamRating=75&steamworks=1&AAA=1&upperPrice=30&sortBy=Metacritic&onSale=1";
+
 function TopDeals() {
   const [data, error, loading] = useFetch(
-    "https://www.cheapshark.com/api/1.0/deals?steamRating=75&steamworks=1&AAA=1&upperPrice=30&sortBy=Metacritic&onSale=1"
+    `https://www.cheapshark.com/api/1.0/deals?${QUERYPARAMS}`
   );
 
   if (loading) return <div>loading...</div>;
@@ -19,7 +22,7 @@ function TopDeals() {
       {filteredData.map((deal) => (
         <StoreItem deal={deal} key={deal.dealID} />
       ))}
-      <Link to="/browse/">View More</Link>
+      <Link to={`/browse?${QUERYPARAMS}`}>View More</Link>
     </>
   );
 }
