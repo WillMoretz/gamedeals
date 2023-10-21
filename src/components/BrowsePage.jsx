@@ -31,14 +31,14 @@ function BrowsePage() {
 
   return (
     <>
-      {/* <form>
+      <form>
         <label htmlFor="filterRepeatsCheckbox">Filter Repeat Deals</label>
         <input
           type="checkbox"
           name="filterRepeatsCheckbox"
           id="filterRepeatsCheckbox"
         />
-      </form> */}
+      </form>
       {filteredData.map((deal) => (
         <StoreItem deal={deal} key={deal.dealID} />
       ))}
