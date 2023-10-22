@@ -22,7 +22,7 @@ function TopDeals() {
       {filteredData.map((deal) => (
         <StoreItem deal={deal} key={deal.dealID} />
       ))}
-      <Link to={`/browse?${QUERYPARAMS}`}>View More</Link>
+      <Link to={`/browse?${QUERYPARAMS}&filter=true`}>View More</Link>
     </>
   );
 }
