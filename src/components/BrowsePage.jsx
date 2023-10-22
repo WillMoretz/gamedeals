@@ -14,7 +14,6 @@ function BrowsePage() {
   for (const param of searchParams) {
     // Skip params unrelated to API
     if (!OPTION_PARAMS.includes(param[0])) {
-      // Add param to the query, if its not the first param include the "&" character
       if (query === "") query += `?${param[0]}=${param[1]}`;
       else query += `&${param[0]}=${param[1]}`;
     }
@@ -27,7 +26,10 @@ function BrowsePage() {
   if (loading) return <div>loading...</div>;
   if (error) return <div>{error.message || "Load Failed"}</div>;
 
-  const filteredData = filterRepeatDeals(data);
+  const shouldFilter = searchParams.get("filter") === "true";
+  let filteredData = null;
+  if (shouldFilter) filteredData = filterRepeatDeals(data);
+  else filteredData = data;
 
   return (
     <>
@@ -37,6 +39,13 @@ function BrowsePage() {
           type="checkbox"
           name="filterRepeatsCheckbox"
           id="filterRepeatsCheckbox"
+          defaultChecked={shouldFilter}
+          onChange={(e) =>
+            setSearchParams((prev) => {
+              prev.set("filter", e.target.checked);
+              return prev;
+            })
+          }
         />
       </form>
       {filteredData.map((deal) => (
