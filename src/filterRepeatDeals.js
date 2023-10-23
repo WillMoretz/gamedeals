@@ -2,18 +2,24 @@
 export default function filterRepeatDeals(dealArray, responseNumTarget = 60) {
   if (!dealArray || dealArray.length === 0) return [];
 
-  const titles = [];
-  const response = [];
+  const response = {};
   let responseNum = 0;
 
   for (let i = 0; i < dealArray.length; i++) {
-    if (titles.includes(dealArray[i].title)) continue;
+    // Detects repeats and uses cheaper deal in the response
+    if (dealArray[i].title in response) {
+      if (
+        parseFloat(response[dealArray[i].title].salePrice) >
+        parseFloat(dealArray[i].salePrice)
+      )
+        response[dealArray[i].title] = dealArray[i];
+      continue;
+    }
 
-    titles.push(dealArray[i].title);
-    response.push(dealArray[i]);
+    response[dealArray[i].title] = dealArray[i];
 
     responseNum++;
     if (responseNum === responseNumTarget) break;
   }
-  return response;
+  return Object.values(response);
 }
