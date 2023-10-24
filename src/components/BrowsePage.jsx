@@ -26,7 +26,7 @@ function BrowsePage() {
   if (loading) return <div>loading...</div>;
   if (error) return <div>{error.message || "Load Failed"}</div>;
 
-  const shouldFilter = searchParams.get("filter") === "true";
+  const shouldFilter = searchParams.get("filter") === "1";
   let filteredData = null;
   if (shouldFilter) filteredData = filterRepeatDeals(data);
   else filteredData = data;
@@ -42,7 +42,8 @@ function BrowsePage() {
           defaultChecked={shouldFilter}
           onChange={(e) =>
             setSearchParams((prev) => {
-              prev.set("filter", e.target.checked);
+              if (e.target.checked) prev.set("filter", 1);
+              else prev.delete("filter");
               return prev;
             })
           }
