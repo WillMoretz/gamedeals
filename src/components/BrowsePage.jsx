@@ -48,6 +48,20 @@ function BrowsePage() {
             })
           }
         />
+        <label htmlFor="aaaCheckbox">AAA</label>
+        <input
+          type="checkbox"
+          name="aaaCheckbox"
+          id="aaaCheckbox"
+          defaultChecked={searchParams.get("AAA") === "1"}
+          onChange={(e) => {
+            setSearchParams((prev) => {
+              if (e.target.checked) prev.set("AAA", 1);
+              else prev.delete("AAA");
+              return prev;
+            });
+          }}
+        />
       </form>
       {filteredData.map((deal) => (
         <StoreItem deal={deal} key={deal.dealID} />
