@@ -121,14 +121,29 @@ function BrowsePage() {
             )
           }
         />
-        {/* <label htmlFor="title">Title</label>
+        <label htmlFor="title">Title</label>
         <input
           type="text"
           name="title"
           id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-        /> */}
+        />
+        <button
+          type="button"
+          onClick={(e) =>
+            setSearchParams(
+              (prev) => {
+                if (title !== "") prev.set("title", title);
+                else prev.delete("title");
+                return prev;
+              },
+              { replace: true }
+            )
+          }
+        >
+          Search Titles
+        </button>
       </form>
       {filteredData.map((deal) => (
         <StoreItem deal={deal} key={deal.dealID} />
