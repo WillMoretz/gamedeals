@@ -33,6 +33,7 @@ function useFetch(url) {
         const cacheItem = fetchCacheItem(url);
         if (cacheItem) {
           // If data is cached, use it
+          if (shouldCancelRequest) return;
           console.log(`data at ${url} loaded from cache`);
           dispatch({ type: "SUCCESS", payload: cacheItem });
         } else {
