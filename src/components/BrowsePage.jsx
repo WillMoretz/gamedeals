@@ -68,6 +68,23 @@ function BrowsePage() {
             );
           }}
         />
+        <label htmlFor="steamworks">Steamworks</label>
+        <input
+          type="checkbox"
+          name="steamworks"
+          id="steamworks"
+          defaultChecked={searchParams.get("steamworks" === "1")}
+          onChange={(e) => {
+            setSearchParams(
+              (prev) => {
+                if (e.target.checked) prev.set("steamworks", 1);
+                else prev.delete("steamworks");
+                return prev;
+              },
+              { replace: true }
+            );
+          }}
+        />
       </form>
       {filteredData.map((deal) => (
         <StoreItem deal={deal} key={deal.dealID} />
