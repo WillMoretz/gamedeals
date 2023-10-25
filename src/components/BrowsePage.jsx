@@ -41,11 +41,14 @@ function BrowsePage() {
           id="filterRepeatsCheckbox"
           defaultChecked={shouldFilter}
           onChange={(e) =>
-            setSearchParams((prev) => {
-              if (e.target.checked) prev.set("filter", 1);
-              else prev.delete("filter");
-              return prev;
-            })
+            setSearchParams(
+              (prev) => {
+                if (e.target.checked) prev.set("filter", 1);
+                else prev.delete("filter");
+                return prev;
+              },
+              { replace: true }
+            )
           }
         />
         <label htmlFor="aaaCheckbox">AAA</label>
@@ -55,11 +58,14 @@ function BrowsePage() {
           id="aaaCheckbox"
           defaultChecked={searchParams.get("AAA") === "1"}
           onChange={(e) => {
-            setSearchParams((prev) => {
-              if (e.target.checked) prev.set("AAA", 1);
-              else prev.delete("AAA");
-              return prev;
-            });
+            setSearchParams(
+              (prev) => {
+                if (e.target.checked) prev.set("AAA", 1);
+                else prev.delete("AAA");
+                return prev;
+              },
+              { replace: true }
+            );
           }}
         />
       </form>
