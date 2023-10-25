@@ -73,7 +73,7 @@ function BrowsePage() {
           type="checkbox"
           name="steamworks"
           id="steamworks"
-          defaultChecked={searchParams.get("steamworks" === "1")}
+          defaultChecked={searchParams.get("steamworks") === "1"}
           onChange={(e) => {
             setSearchParams(
               (prev) => {
@@ -84,6 +84,23 @@ function BrowsePage() {
               { replace: true }
             );
           }}
+        />
+        <label htmlFor="onSale">On Sale</label>
+        <input
+          type="checkbox"
+          name="onSale"
+          id="onSale"
+          defaultChecked={searchParams.get("onSale") === "1"}
+          onChange={(e) =>
+            setSearchParams(
+              (prev) => {
+                if (e.target.checked) prev.set("onSale", 1);
+                else prev.delete("onSale");
+                return prev;
+              },
+              { replace: true }
+            )
+          }
         />
       </form>
       {filteredData.map((deal) => (
