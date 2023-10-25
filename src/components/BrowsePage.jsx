@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import useFetch from "../useFetch";
 import StoreItem from "./StoreItem";
@@ -8,6 +9,7 @@ const OPTION_PARAMS = ["filter"];
 // Displays all of the game stores
 function BrowsePage() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [title, setTitle] = useState("");
 
   // Build the API query
   let query = "";
@@ -102,6 +104,31 @@ function BrowsePage() {
             )
           }
         />
+        <label htmlFor="exact">Exact Match</label>
+        <input
+          type="checkbox"
+          name="exact"
+          id="exact"
+          defaultChecked={searchParams.get("exact" === "1")}
+          onChange={(e) =>
+            setSearchParams(
+              (prev) => {
+                if (e.target.checked) prev.set("exact", 1);
+                else prev.delete("exact");
+                return prev;
+              },
+              { replace: true }
+            )
+          }
+        />
+        {/* <label htmlFor="title">Title</label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        /> */}
       </form>
       {filteredData.map((deal) => (
         <StoreItem deal={deal} key={deal.dealID} />
