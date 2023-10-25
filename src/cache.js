@@ -1,12 +1,18 @@
 const CACHE = {};
 
 function addCacheItem(key, value) {
-  CACHE[key] = value;
+  CACHE[sortParamString(key)] = value;
+}
+
+function sortParamString(paramStr) {
+  const split1 = paramStr.split("?");
+  const split2 = split1[1].split("&");
+  const sortedArr = split2.sort();
+  return `${split1[0]}?${sortedArr.join("&")}`;
 }
 
 function fetchCacheItem(key) {
-  if (key in CACHE) return CACHE[key];
-  return null;
+  return CACHE[sortParamString(key)];
 }
 
 export { addCacheItem, fetchCacheItem };
