@@ -131,7 +131,7 @@ function BrowsePage() {
         />
         <button
           type="button"
-          onClick={(e) =>
+          onClick={() =>
             setSearchParams(
               (prev) => {
                 if (title !== "") prev.set("title", title);
