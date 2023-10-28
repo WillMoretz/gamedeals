@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import useFetch from "../useFetch";
 import StoreItem from "./StoreItem";
 import filterRepeatDeals from "../filterRepeatDeals";
@@ -144,9 +144,20 @@ function BrowsePage() {
         >
           Search Titles
         </button>
-        <Link to={"/browse"} replace={true}>
+        <button
+          type="button"
+          onClick={() =>
+            setSearchParams(
+              () => {
+                setTitle("");
+                return new URLSearchParams();
+              },
+              { replace: true }
+            )
+          }
+        >
           Reset Filters
-        </Link>
+        </button>
       </form>
       {filteredData.map((deal) => (
         <StoreItem deal={deal} key={deal.dealID} />
