@@ -128,6 +128,9 @@ function BrowsePage() {
           id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") e.preventDefault();
+          }}
         />
         <button
           type="button"
