@@ -25,6 +25,17 @@ function BrowsePage() {
     `https://www.cheapshark.com/api/1.0/deals${query}`
   );
 
+  const toggleParam = (paramName, shouldEnable) => {
+    setSearchParams(
+      (prev) => {
+        if (shouldEnable) prev.set(paramName, 1);
+        else prev.delete(paramName);
+        return prev;
+      },
+      { replace: true }
+    );
+  };
+
   if (loading) return <div>loading...</div>;
   if (error) return <div>{error.message || "Load Failed"}</div>;
 
@@ -42,16 +53,7 @@ function BrowsePage() {
           name="filterRepeatsCheckbox"
           id="filterRepeatsCheckbox"
           checked={shouldFilter}
-          onChange={(e) =>
-            setSearchParams(
-              (prev) => {
-                if (e.target.checked) prev.set("filter", 1);
-                else prev.delete("filter");
-                return prev;
-              },
-              { replace: true }
-            )
-          }
+          onChange={(e) => toggleParam("filter", e.target.checked)}
         />
         <label htmlFor="aaaCheckbox">AAA</label>
         <input
@@ -59,16 +61,7 @@ function BrowsePage() {
           name="aaaCheckbox"
           id="aaaCheckbox"
           checked={searchParams.get("AAA") === "1"}
-          onChange={(e) => {
-            setSearchParams(
-              (prev) => {
-                if (e.target.checked) prev.set("AAA", 1);
-                else prev.delete("AAA");
-                return prev;
-              },
-              { replace: true }
-            );
-          }}
+          onChange={(e) => toggleParam("AAA", e.target.checked)}
         />
         <label htmlFor="steamworks">Steamworks</label>
         <input
@@ -76,16 +69,7 @@ function BrowsePage() {
           name="steamworks"
           id="steamworks"
           checked={searchParams.get("steamworks") === "1"}
-          onChange={(e) => {
-            setSearchParams(
-              (prev) => {
-                if (e.target.checked) prev.set("steamworks", 1);
-                else prev.delete("steamworks");
-                return prev;
-              },
-              { replace: true }
-            );
-          }}
+          onChange={(e) => toggleParam("steamworks", e.target.checked)}
         />
         <label htmlFor="onSale">On Sale</label>
         <input
@@ -93,16 +77,7 @@ function BrowsePage() {
           name="onSale"
           id="onSale"
           checked={searchParams.get("onSale") === "1"}
-          onChange={(e) =>
-            setSearchParams(
-              (prev) => {
-                if (e.target.checked) prev.set("onSale", 1);
-                else prev.delete("onSale");
-                return prev;
-              },
-              { replace: true }
-            )
-          }
+          onChange={(e) => toggleParam("onSale", e.target.checked)}
         />
         <label htmlFor="exact">Exact Match</label>
         <input
@@ -110,16 +85,7 @@ function BrowsePage() {
           name="exact"
           id="exact"
           checked={searchParams.get("exact") === "1"}
-          onChange={(e) =>
-            setSearchParams(
-              (prev) => {
-                if (e.target.checked) prev.set("exact", 1);
-                else prev.delete("exact");
-                return prev;
-              },
-              { replace: true }
-            )
-          }
+          onChange={(e) => toggleParam("exact", e.target.checked)}
         />
         <label htmlFor="title">Title</label>
         <input
