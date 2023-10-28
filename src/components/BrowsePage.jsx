@@ -36,6 +36,17 @@ function BrowsePage() {
     );
   };
 
+  const updateTitleParam = () => {
+    setSearchParams(
+      (prev) => {
+        if (title !== "") prev.set("title", title);
+        else prev.delete("title");
+        return prev;
+      },
+      { replace: true }
+    );
+  };
+
   if (loading) return <div>loading...</div>;
   if (error) return <div>{error.message || "Load Failed"}</div>;
 
@@ -98,19 +109,7 @@ function BrowsePage() {
             if (e.key === "Enter") e.preventDefault();
           }}
         />
-        <button
-          type="button"
-          onClick={() =>
-            setSearchParams(
-              (prev) => {
-                if (title !== "") prev.set("title", title);
-                else prev.delete("title");
-                return prev;
-              },
-              { replace: true }
-            )
-          }
-        >
+        <button type="button" onClick={() => updateTitleParam()}>
           Search Titles
         </button>
         <button
