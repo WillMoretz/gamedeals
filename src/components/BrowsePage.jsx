@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import useFetch from "../useFetch";
 import StoreItem from "./StoreItem";
 import filterRepeatDeals from "../filterRepeatDeals";
@@ -41,7 +41,7 @@ function BrowsePage() {
           type="checkbox"
           name="filterRepeatsCheckbox"
           id="filterRepeatsCheckbox"
-          defaultChecked={shouldFilter}
+          checked={shouldFilter}
           onChange={(e) =>
             setSearchParams(
               (prev) => {
@@ -58,7 +58,7 @@ function BrowsePage() {
           type="checkbox"
           name="aaaCheckbox"
           id="aaaCheckbox"
-          defaultChecked={searchParams.get("AAA") === "1"}
+          checked={searchParams.get("AAA") === "1"}
           onChange={(e) => {
             setSearchParams(
               (prev) => {
@@ -75,7 +75,7 @@ function BrowsePage() {
           type="checkbox"
           name="steamworks"
           id="steamworks"
-          defaultChecked={searchParams.get("steamworks") === "1"}
+          checked={searchParams.get("steamworks") === "1"}
           onChange={(e) => {
             setSearchParams(
               (prev) => {
@@ -92,7 +92,7 @@ function BrowsePage() {
           type="checkbox"
           name="onSale"
           id="onSale"
-          defaultChecked={searchParams.get("onSale") === "1"}
+          checked={searchParams.get("onSale") === "1"}
           onChange={(e) =>
             setSearchParams(
               (prev) => {
@@ -109,7 +109,7 @@ function BrowsePage() {
           type="checkbox"
           name="exact"
           id="exact"
-          defaultChecked={searchParams.get("exact" === "1")}
+          checked={searchParams.get("exact" === "1")}
           onChange={(e) =>
             setSearchParams(
               (prev) => {
@@ -144,6 +144,9 @@ function BrowsePage() {
         >
           Search Titles
         </button>
+        <Link to={"/browse"} replace={true}>
+          Reset Filters
+        </Link>
       </form>
       {filteredData.map((deal) => (
         <StoreItem deal={deal} key={deal.dealID} />
