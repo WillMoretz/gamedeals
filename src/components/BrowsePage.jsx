@@ -14,7 +14,7 @@ function BrowsePage() {
   // Build the API query
   let query = "";
   for (const param of searchParams) {
-    // Skip params unrelated to API
+    // [0] contains param name, [1] contains param value
     if (!OPTION_PARAMS.includes(param[0])) {
       if (query === "") query += `?${param[0]}=${param[1]}`;
       else query += `&${param[0]}=${param[1]}`;
@@ -109,7 +109,7 @@ function BrowsePage() {
           type="checkbox"
           name="exact"
           id="exact"
-          checked={searchParams.get("exact" === "1")}
+          checked={searchParams.get("exact") === "1"}
           onChange={(e) =>
             setSearchParams(
               (prev) => {
@@ -146,15 +146,10 @@ function BrowsePage() {
         </button>
         <button
           type="button"
-          onClick={() =>
-            setSearchParams(
-              () => {
-                setTitle("");
-                return new URLSearchParams();
-              },
-              { replace: true }
-            )
-          }
+          onClick={() => {
+            setTitle("");
+            setSearchParams(() => new URLSearchParams(), { replace: true });
+          }}
         >
           Reset Filters
         </button>
