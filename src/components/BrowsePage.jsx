@@ -106,8 +106,12 @@ function BrowsePage() {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === "Enter") e.preventDefault();
+            if (e.key === "Enter") {
+              e.preventDefault();
+              updateTitleParam();
+            }
           }}
+          onBlur={() => updateTitleParam()}
         />
         <button type="button" onClick={() => updateTitleParam()}>
           Search Titles
