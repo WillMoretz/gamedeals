@@ -25,22 +25,11 @@ function BrowsePage() {
     `https://www.cheapshark.com/api/1.0/deals${query}`
   );
 
-  const toggleParam = (paramName, shouldEnable) => {
+  const updateParam = (paramName, condition, value) => {
     setSearchParams(
       (prev) => {
-        if (shouldEnable) prev.set(paramName, 1);
+        if (condition) prev.set(paramName, value);
         else prev.delete(paramName);
-        return prev;
-      },
-      { replace: true }
-    );
-  };
-
-  const updateTitleParam = () => {
-    setSearchParams(
-      (prev) => {
-        if (title !== "") prev.set("title", title);
-        else prev.delete("title");
         return prev;
       },
       { replace: true }
@@ -64,7 +53,7 @@ function BrowsePage() {
           name="filterRepeatsCheckbox"
           id="filterRepeatsCheckbox"
           checked={shouldFilter}
-          onChange={(e) => toggleParam("filter", e.target.checked)}
+          onChange={(e) => updateParam("filter", e.target.checked, 1)}
         />
         <label htmlFor="aaaCheckbox">AAA</label>
         <input
@@ -72,7 +61,7 @@ function BrowsePage() {
           name="aaaCheckbox"
           id="aaaCheckbox"
           checked={searchParams.get("AAA") === "1"}
-          onChange={(e) => toggleParam("AAA", e.target.checked)}
+          onChange={(e) => updateParam("AAA", e.target.checked, 1)}
         />
         <label htmlFor="steamworks">Steamworks</label>
         <input
@@ -80,7 +69,7 @@ function BrowsePage() {
           name="steamworks"
           id="steamworks"
           checked={searchParams.get("steamworks") === "1"}
-          onChange={(e) => toggleParam("steamworks", e.target.checked)}
+          onChange={(e) => updateParam("steamworks", e.target.checked, 1)}
         />
         <label htmlFor="onSale">On Sale</label>
         <input
@@ -88,7 +77,7 @@ function BrowsePage() {
           name="onSale"
           id="onSale"
           checked={searchParams.get("onSale") === "1"}
-          onChange={(e) => toggleParam("onSale", e.target.checked)}
+          onChange={(e) => updateParam("onSale", e.target.checked, 1)}
         />
         <label htmlFor="exact">Exact Match</label>
         <input
@@ -96,7 +85,7 @@ function BrowsePage() {
           name="exact"
           id="exact"
           checked={searchParams.get("exact") === "1"}
-          onChange={(e) => toggleParam("exact", e.target.checked)}
+          onChange={(e) => updateParam("exact", e.target.checked, 1)}
         />
         <label htmlFor="title">Title</label>
         <input
@@ -108,12 +97,15 @@ function BrowsePage() {
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               e.preventDefault();
-              updateTitleParam();
+              updateParam("title", title !== "", title);
             }
           }}
-          onBlur={() => updateTitleParam()}
+          onBlur={() => updateParam("title", title !== "", title)}
         />
-        <button type="button" onClick={() => updateTitleParam()}>
+        <button
+          type="button"
+          onClick={() => updateParam("title", title !== "", title)}
+        >
           Search Titles
         </button>
         <button
