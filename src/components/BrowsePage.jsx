@@ -147,6 +147,8 @@ function BrowsePage() {
           type="button"
           onClick={() => {
             setTitle("");
+            setSteamRating(0);
+            setSteamRatingEnabled(false);
             setSearchParams(() => new URLSearchParams(), { replace: true });
           }}
         >
