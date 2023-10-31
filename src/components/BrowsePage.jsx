@@ -4,13 +4,18 @@ import useFetch from "../useFetch";
 import StoreItem from "./StoreItem";
 import filterRepeatDeals from "../filterRepeatDeals";
 
-const OPTION_PARAMS = ["filter"];
+const OPTION_PARAMS = ["filter", "steamRating"];
 
 // Displays all of the game stores
 function BrowsePage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [title, setTitle] = useState(
     searchParams.get("title") === null ? "" : searchParams.get("title")
+  );
+  const [steamRating, setSteamRating] = useState(
+    searchParams.get("steamRating") === null
+      ? 10
+      : searchParams.get("steamRating")
   );
 
   // Build the API query
@@ -110,6 +115,27 @@ function BrowsePage() {
         >
           Search Titles
         </button>
+        <label htmlFor="steamRating">Rating</label>
+        <input
+          type="range"
+          name="steamRating"
+          id="steamRating"
+          min={10}
+          max={100}
+          step={5}
+          value={steamRating}
+          onChange={(e) => setSteamRating(e.target.value)}
+          onMouseUp={() =>
+            setSearchParams(
+              (prev) => {
+                if (steamRating > 10) prev.set("steamRating", steamRating);
+                else prev.delete("steamRating");
+                return prev;
+              },
+              { replace: true }
+            )
+          }
+        />
         <button
           type="button"
           onClick={() => {
