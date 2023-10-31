@@ -9,7 +9,9 @@ const OPTION_PARAMS = ["filter"];
 // Displays all of the game stores
 function BrowsePage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState(
+    searchParams.get("title") === null ? "" : searchParams.get("title")
+  );
 
   // Build the API query
   let query = "";
