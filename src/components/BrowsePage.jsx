@@ -51,6 +51,13 @@ function BrowsePage() {
     updateParam("steamRating", bool, steamRating);
   };
 
+  const resetParams = () => {
+    setTitle("");
+    setSteamRating(0);
+    setSteamRatingEnabled(false);
+    setSearchParams(() => new URLSearchParams(), { replace: true });
+  };
+
   if (loading) return <div>loading...</div>;
   if (error) return <div>{error.message || "Load Failed"}</div>;
 
@@ -143,15 +150,7 @@ function BrowsePage() {
           onChange={(e) => setSteamRating(e.target.value)}
           onMouseUp={() => updateParam("steamRating", true, steamRating)}
         />
-        <button
-          type="button"
-          onClick={() => {
-            setTitle("");
-            setSteamRating(0);
-            setSteamRatingEnabled(false);
-            setSearchParams(() => new URLSearchParams(), { replace: true });
-          }}
-        >
+        <button type="button" onClick={() => resetParams()}>
           Reset Filters
         </button>
       </form>
