@@ -4,7 +4,7 @@ import useFetch from "../useFetch";
 import StoreItem from "./StoreItem";
 import filterRepeatDeals from "../filterRepeatDeals";
 
-const OPTION_PARAMS = ["filter", "steamRating"];
+const OPTION_PARAMS = ["filter"];
 
 // Displays all of the game stores
 function BrowsePage() {
@@ -14,8 +14,11 @@ function BrowsePage() {
   );
   const [steamRating, setSteamRating] = useState(
     searchParams.get("steamRating") === null
-      ? 10
+      ? 0
       : searchParams.get("steamRating")
+  );
+  const [steamRatingEnabled, setSteamRatingEnabled] = useState(
+    searchParams.get("steamRating") === null ? false : true
   );
 
   // Build the API query
@@ -41,6 +44,11 @@ function BrowsePage() {
       },
       { replace: true }
     );
+  };
+
+  const toggleSteam = (bool) => {
+    setSteamRatingEnabled(bool);
+    updateParam("steamRating", bool, steamRating);
   };
 
   if (loading) return <div>loading...</div>;
@@ -115,26 +123,25 @@ function BrowsePage() {
         >
           Search Titles
         </button>
-        <label htmlFor="steamRating">Rating</label>
+        <label htmlFor="toggleSteamRating">Steam Rating</label>
+        <input
+          type="checkbox"
+          name="toggleSteamRating"
+          id="toggleSteamRating"
+          checked={steamRatingEnabled}
+          onChange={(e) => toggleSteam(e.target.checked)}
+        />
         <input
           type="range"
           name="steamRating"
           id="steamRating"
-          min={10}
+          min={0}
           max={100}
           step={5}
           value={steamRating}
+          disabled={!steamRatingEnabled}
           onChange={(e) => setSteamRating(e.target.value)}
-          onMouseUp={() =>
-            setSearchParams(
-              (prev) => {
-                if (steamRating > 10) prev.set("steamRating", steamRating);
-                else prev.delete("steamRating");
-                return prev;
-              },
-              { replace: true }
-            )
-          }
+          onMouseUp={() => updateParam("steamRating", true, steamRating)}
         />
         <button
           type="button"
