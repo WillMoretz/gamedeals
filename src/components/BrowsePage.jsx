@@ -4,6 +4,7 @@ import useFetch from "../useFetch";
 import StoreItem from "./StoreItem";
 import filterRepeatDeals from "../filterRepeatDeals";
 
+// THE API params the user is allowed to query with, using the form controls implemented below
 const ALLOWED_API_SEARCH_PARAMS = [
   "AAA",
   "steamworks",
@@ -11,6 +12,8 @@ const ALLOWED_API_SEARCH_PARAMS = [
   "exact",
   "steamRating",
   "upperPrice",
+  "storeID",
+  "onSale",
 ];
 
 // Displays all of the game stores
@@ -78,6 +81,8 @@ function BrowsePage() {
     setTitle("");
     setSteamRating(0);
     setSteamRatingEnabled(false);
+    setUpperPrice(100);
+    setUpperPriceEnabled(false);
     setSearchParams(() => new URLSearchParams(), { replace: true });
   };
 
