@@ -4,14 +4,23 @@ import useFetch from "../useFetch";
 import StoreItem from "./StoreItem";
 import filterRepeatDeals from "../filterRepeatDeals";
 
-const OPTION_PARAMS = ["filter"];
+const ALLOWED_API_SEARCH_PARAMS = [
+  "AAA",
+  "steamworks",
+  "onSale",
+  "exact",
+  "steamRating",
+  "upperPrice",
+];
 
 // Displays all of the game stores
 function BrowsePage() {
   const [searchParams, setSearchParams] = useSearchParams();
+
   const [title, setTitle] = useState(
     searchParams.get("title") === null ? "" : searchParams.get("title")
   );
+
   const [steamRating, setSteamRating] = useState(
     searchParams.get("steamRating") === null
       ? 0
@@ -21,11 +30,20 @@ function BrowsePage() {
     searchParams.get("steamRating") === null ? false : true
   );
 
+  const [upperPrice, setUpperPrice] = useState(
+    searchParams.get("upperPrice") === null
+      ? 100
+      : searchParams.get("upperPrice")
+  );
+  const [upperPriceEnabled, setUpperPriceEnabled] = useState(
+    searchParams.get("upperPrice" === null) ? false : true
+  );
+
   // Build the API query
   let query = "";
   for (const param of searchParams) {
     // [0] contains param name, [1] contains param value
-    if (!OPTION_PARAMS.includes(param[0])) {
+    if (ALLOWED_API_SEARCH_PARAMS.includes(param[0])) {
       if (query === "") query += `?${param[0]}=${param[1]}`;
       else query += `&${param[0]}=${param[1]}`;
     }
@@ -49,6 +67,11 @@ function BrowsePage() {
   const toggleSteam = (bool) => {
     setSteamRatingEnabled(bool);
     updateParam("steamRating", bool, steamRating);
+  };
+
+  const toggleUpperPrice = (bool) => {
+    setUpperPriceEnabled(bool);
+    updateParam("upperPrice", bool, upperPrice);
   };
 
   const resetParams = () => {
@@ -149,6 +172,28 @@ function BrowsePage() {
           disabled={!steamRatingEnabled}
           onChange={(e) => setSteamRating(e.target.value)}
           onMouseUp={() => updateParam("steamRating", true, steamRating)}
+        />
+        <label htmlFor="toggleUpperPrice">Maximum Price</label>
+        <input
+          type="checkbox"
+          name="toggleUpperPrice"
+          id="toggleUpperPrice"
+          checked={upperPriceEnabled}
+          onChange={(e) => {
+            toggleUpperPrice(e.target.checked);
+          }}
+        />
+        <input
+          type="range"
+          name="upperPrice"
+          id="upperPrice"
+          min={0}
+          max={100}
+          step={5}
+          value={upperPrice}
+          disabled={!upperPriceEnabled}
+          onChange={(e) => setUpperPrice(e.target.value)}
+          onMouseUp={() => updateParam("upperPrice", true, upperPrice)}
         />
         <button type="button" onClick={() => resetParams()}>
           Reset Filters
