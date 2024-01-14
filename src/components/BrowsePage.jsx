@@ -189,9 +189,23 @@ function BrowsePage() {
           }}
         />
         <input
+          type="number"
+          name="upperPriceBox"
+          id="upperPriceBox"
+          min={0}
+          max={100}
+          step={5}
+          value={upperPrice}
+          disabled={!upperPriceEnabled}
+          onChange={(e) => {
+            setUpperPrice(e.target.value);
+            updateParam("upperPrice", true, e.target.value);
+          }}
+        />
+        <input
           type="range"
-          name="upperPrice"
-          id="upperPrice"
+          name="upperPriceSlider"
+          id="upperPriceSlider"
           min={0}
           max={100}
           step={5}
