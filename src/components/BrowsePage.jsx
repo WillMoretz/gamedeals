@@ -167,9 +167,23 @@ function BrowsePage() {
           onChange={(e) => toggleSteam(e.target.checked)}
         />
         <input
+          type="number"
+          name="steamRatingBox"
+          id="steamRatingBox"
+          min={0}
+          max={100}
+          step={5}
+          value={steamRating}
+          disabled={!steamRatingEnabled}
+          onChange={(e) => {
+            setSteamRating(e.target.value);
+            updateParam("steamRating", true, e.target.value);
+          }}
+        />
+        <input
           type="range"
-          name="steamRating"
-          id="steamRating"
+          name="steamRatingSlider"
+          id="steamRatingSlider"
           min={0}
           max={100}
           step={5}
