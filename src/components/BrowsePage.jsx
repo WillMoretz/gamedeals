@@ -10,6 +10,7 @@ const ALLOWED_API_SEARCH_PARAMS = [
   "steamworks",
   "onSale",
   "exact",
+  "title",
   "steamRating",
   "upperPrice",
   "storeID",
