@@ -40,7 +40,7 @@ function BrowsePage() {
       : searchParams.get("upperPrice")
   );
   const [upperPriceEnabled, setUpperPriceEnabled] = useState(
-    searchParams.get("upperPrice" === null) ? false : true
+    searchParams.get("upperPrice") === null ? false : true
   );
 
   // Build the API query
@@ -199,9 +199,7 @@ function BrowsePage() {
           name="toggleUpperPrice"
           id="toggleUpperPrice"
           checked={upperPriceEnabled}
-          onChange={(e) => {
-            toggleUpperPrice(e.target.checked);
-          }}
+          onChange={(e) => toggleUpperPrice(e.target.checked)}
         />
         <input
           type="number"
