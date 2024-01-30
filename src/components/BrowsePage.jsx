@@ -43,6 +43,12 @@ function BrowsePage() {
     searchParams.get("upperPrice") === null ? false : true
   );
 
+  const [shouldShowStoreSelector, setShouldShowStoreSelector] = useState(false);
+  const toggleStoreSelector = () => {
+    if (shouldShowStoreSelector) setShouldShowStoreSelector(false);
+    else setShouldShowStoreSelector(true);
+  };
+
   // Build the API query
   let query = "";
   for (const param of searchParams) {
@@ -230,6 +236,10 @@ function BrowsePage() {
         <button type="button" onClick={() => resetParams()}>
           Reset Filters
         </button>
+        <button type="button" onClick={() => toggleStoreSelector()}>
+          Filter Stores
+        </button>
+        {shouldShowStoreSelector ? <div>Store Selector</div> : <></>}
       </form>
       {filteredData.map((deal) => (
         <StoreItem deal={deal} key={deal.dealID} />
